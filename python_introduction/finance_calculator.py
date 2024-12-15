@@ -1,6 +1,6 @@
 # personal finance calculator
-monthly_income = int(input('Enter your monthly income in $: '))
-monthly_expenses = int(input('Enter your total monthly expenses in $: '))
+monthly_income = int(input('Enter your monthly income:'))
+monthly_expenses = int(input('Enter your total monthly expenses:'))
 
 # formula for calculating monthly savings
 monthly_savings = monthly_income - monthly_expenses
