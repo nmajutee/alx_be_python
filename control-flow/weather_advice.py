@@ -1,4 +1,4 @@
-# This script check the weather and gives a recommendation
+# This script checks the weather and gives a recommendation.
 current_weather = input("What's the weather like today? (sunny/rainy/cold): ")
 
 if current_weather == "sunny":
