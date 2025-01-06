@@ -1,7 +1,7 @@
 # Description: This script prompts the user to input a task description, priority, and whether the task is time-bound.
-task = input("Enter the task description: ")
-priority = input("Enter task priority (high, medium, low): ").lower()
-time_bound = input("Is the task time-bound (yes or no)? ").lower()
+task = input("Enter your task: ")
+priority = input("Priority (high/medium/low): ").lower()
+time_bound = input("Is it time-bound? (yes/no): ").lower()
 
 match priority:
     case "high":
