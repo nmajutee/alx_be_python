@@ -1,0 +1,1 @@
+countries = ['finland', 'sweden', 'norway']
