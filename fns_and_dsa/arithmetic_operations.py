@@ -1,7 +1,18 @@
 
-num1 = int(input("Enter first number: "))
-num2 = int(input("Enter second number: "))
-operation = input("Enter operation (+, -, *, /): ")
+"""Arithmetic Operations"""
 
 def perform_operation(num1, num2, operation):
-    match operta
+    match operation:
+        case 'add':
+            return num1 + num2
+        case 'subtract':
+            return num1 - num2
+        case 'multiply':
+            return num1 * num2
+        case 'divide':
+            if num2 != 0:
+                return num1 / num2
+            else:
+                print('division by zero error!')
+        case _:
+            print('enter the correct operation')
