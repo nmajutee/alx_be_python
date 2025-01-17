@@ -1,33 +1,17 @@
-1. Initialize an empty list called `shopping_list`.
+IMPORT datetime FROM datetime module
 
-2. Create an infinite loop:
-   a. Print the following menu options:
-      1. Add an item
-      2. Remove an item
-      3. View the list
-      4. Exit
+FUNCTION display_current_datetime():
+    current_date = GET current date and time using datetime.now()
+    formatted_date = FORMAT current_date as "YYYY-MM-DD HH:MM:SS"
+    PRINT "Current Date and Time:", formatted_date
 
-   b. Prompt the user to select an option (1, 2, 3, or 4).
+FUNCTION calculate_future_date():
+    current_date = GET current date and time using datetime.now()
+    number_of_days = PROMPT user to input number of days (integer)
+    future_date = current_date + timedelta(days=number_of_days)
+    formatted_future_date = FORMAT future_date as "YYYY-MM-DD"
+    PRINT "Future Date after", number_of_days, "days:", formatted_future_date
 
-   c. Based on the user's input:
-      - If the input is "1":
-          i. Prompt the user to enter the item name.
-         ii. Append the item to `shopping_list`.
-        iii. Print a success message.
-
-      - If the input is "2":
-          i. Prompt the user to enter the item name.
-         ii. Check if the item exists in `shopping_list`.
-            - If it exists, remove the item.
-              Print a success message.
-            - Otherwise, print "Item not found."
-
-      - If the input is "3":
-          i. Check if `shopping_list` is empty.
-            - If empty, print "The list is empty."
-            - Otherwise, print each item in the list.
-
-      - If the input is "4":
-          i. Exit the loop.
-
-      - For any other input, print "Invalid option. Please try again."
+# Main script execution
+CALL display_current_datetime()
+CALL calculate_future_date()
