@@ -1,17 +1,44 @@
-IMPORT datetime FROM datetime module
+# Define Global Variables
+SET FAHRENHEIT_TO_CELSIUS_FACTOR = 5 / 9
+SET CELSIUS_TO_FAHRENHEIT_FACTOR = 9 / 5
 
-FUNCTION display_current_datetime():
-    current_date = GET current date and time using datetime.now()
-    formatted_date = FORMAT current_date as "YYYY-MM-DD HH:MM:SS"
-    PRINT "Current Date and Time:", formatted_date
+# Define Function to Convert Fahrenheit to Celsius
+FUNCTION convert_to_celsius(fahrenheit)
+    RETURN (fahrenheit - 32) * FAHRENHEIT_TO_CELSIUS_FACTOR
+END FUNCTION
 
-FUNCTION calculate_future_date():
-    current_date = GET current date and time using datetime.now()
-    number_of_days = PROMPT user to input number of days (integer)
-    future_date = current_date + timedelta(days=number_of_days)
-    formatted_future_date = FORMAT future_date as "YYYY-MM-DD"
-    PRINT "Future Date after", number_of_days, "days:", formatted_future_date
+# Define Function to Convert Celsius to Fahrenheit
+FUNCTION convert_to_fahrenheit(celsius)
+    RETURN (celsius * CELSIUS_TO_FAHRENHEIT_FACTOR) + 32
+END FUNCTION
 
-# Main script execution
-CALL display_current_datetime()
-CALL calculate_future_date()
+# Main Script Execution
+FUNCTION main()
+    DISPLAY "Welcome to the Temperature Conversion Tool!"
+
+    # Prompt user for input
+    INPUT temperature AS STRING
+    INPUT unit AS STRING ("C" for Celsius, "F" for Fahrenheit)
+
+    # Validate input
+    TRY
+        SET temperature = CONVERT temperature TO FLOAT
+    CATCH EXCEPTION
+        RAISE ERROR "Invalid temperature. Please enter a numeric value."
+        EXIT PROGRAM
+    END TRY
+
+    # Perform conversion based on the unit
+    IF unit IS "C"
+        SET converted_temperature = CALL convert_to_fahrenheit(temperature)
+        DISPLAY "Temperature in Fahrenheit: ", converted_temperature
+    ELSE IF unit IS "F"
+        SET converted_temperature = CALL convert_to_celsius(temperature)
+        DISPLAY "Temperature in Celsius: ", converted_temperature
+    ELSE
+        DISPLAY "Invalid unit. Please enter 'C' for Celsius or 'F' for Fahrenheit."
+    END IF
+END FUNCTION
+
+# Start the Program
+CALL main()
