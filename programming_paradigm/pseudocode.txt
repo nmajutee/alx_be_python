@@ -1,12 +1,62 @@
-DEFINE FUNCTION safe_divide(numerator, denominator)
-    TRY:
-        CONVERT numerator TO FLOAT
-        CONVERT denominator TO FLOAT
-        IF denominator == 0:
-            RETURN "Error: Division by zero is not allowed."
-        ENDIF
-        RETURN numerator / denominator
-    EXCEPT ValueError:
-        RETURN "Error: Inputs must be numbers."
-    END TRY
-END FUNCTION
+CLASS Library
+
+    // Constructor: Initializes a new library with an empty collection of books.
+    FUNCTION __init__():
+        CREATE empty list _books
+    END FUNCTION
+
+    // Method to add a new Book to the library.
+    FUNCTION add_book(book):
+        APPEND book TO _books
+    END FUNCTION
+
+    // Method to check out a book by its title.
+    FUNCTION check_out_book(title):
+        FOR EACH book IN _books:
+            IF book.title EQUALS title THEN:
+                // Check if the book is available for checkout.
+                IF book is NOT checked out THEN:
+                    CALL book.check_out()  // Let the Book handle its own state.
+                    RETURN "Book 'title' has been checked out."
+                ELSE:
+                    RETURN "Book 'title' is already checked out."
+                END IF
+            END IF
+        END FOR
+        // If no matching book is found.
+        RETURN "Book 'title' is not available or does not exist."
+    END FUNCTION
+
+    // Method to return a book by its title.
+    FUNCTION return_book(title):
+        FOR EACH book IN _books:
+            IF book.title EQUALS title THEN:
+                // Check if the book is currently checked out.
+                IF book is checked out THEN:
+                    CALL book.return_book()  // Let the Book handle its own state.
+                    RETURN "Book 'title' has been returned."
+                ELSE:
+                    RETURN "Book 'title' was not checked out."
+                END IF
+            END IF
+        END FOR
+        // If no matching book is found.
+        RETURN "Book 'title' does not exist in the library."
+    END FUNCTION
+
+    // Method to list all books that are available for checkout.
+    FUNCTION list_available_books():
+        CREATE empty list available_books
+        FOR EACH book IN _books:
+            IF book is NOT checked out THEN:
+                ADD book.title TO available_books
+            END IF
+        END FOR
+        IF available_books IS EMPTY THEN:
+            RETURN "No books available."
+        ELSE:
+            RETURN available_books
+        END IF
+    END FUNCTION
+
+END CLASS
