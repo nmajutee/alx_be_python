@@ -1,21 +1,12 @@
-BEGIN Class BankAccount
-    DEFINE __init__(self, initial_balance=0)
-        SET self.account_balance = initial_balance
-    
-    DEFINE deposit(self, amount)
-        IF amount > 0 THEN
-            INCREASE self.account_balance BY amount
-        ELSE
-            PRINT "Invalid deposit amount"
-
-    DEFINE withdraw(self, amount)
-        IF amount > 0 AND amount <= self.account_balance THEN
-            DECREASE self.account_balance BY amount
-            RETURN True
-        ELSE
-            PRINT "Insufficient funds or invalid withdrawal amount"
-            RETURN False
-
-    DEFINE display_balance(self)
-        PRINT "Current Balance: " + self.account_balance
-END Class
+DEFINE FUNCTION safe_divide(numerator, denominator)
+    TRY:
+        CONVERT numerator TO FLOAT
+        CONVERT denominator TO FLOAT
+        IF denominator == 0:
+            RETURN "Error: Division by zero is not allowed."
+        ENDIF
+        RETURN numerator / denominator
+    EXCEPT ValueError:
+        RETURN "Error: Inputs must be numbers."
+    END TRY
+END FUNCTION
